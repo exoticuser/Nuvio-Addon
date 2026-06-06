@@ -44,7 +44,8 @@ npm run start
 
 The addon supports three configuration sources (highest priority first):
 
-1. Query params: `?provider=streamio-bridge&upstreamUrl=https://...&apiKey=...`
+1. Query params: `?provider=streamio-bridge&upstreamUrl=https://...`
+   - Optional auth header: `x-nuvio-api-key: <key>` (or standard Authorization bearer token)
 2. Base64URL JSON path prefix:
    - `/{base64url-json}/manifest.json`
    - `/{base64url-json}/catalog/movie/bridge-movies.json`

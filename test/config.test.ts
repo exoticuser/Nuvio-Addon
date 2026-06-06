@@ -4,7 +4,11 @@ import type { Request } from "express";
 import { resolveRuntimeConfig } from "../src/config/parseConfig.js";
 
 const asRequest = (params: Record<string, string>, query: Record<string, string>): Request =>
-  ({ params, query } as unknown as Request);
+  ({
+    params,
+    query,
+    header: () => undefined,
+  } as unknown as Request);
 
 test("resolveRuntimeConfig uses query over env values", () => {
   process.env.NUVIO_PROVIDER = "streamio-bridge";

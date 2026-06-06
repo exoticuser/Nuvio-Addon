@@ -15,10 +15,16 @@ const pickDefined = <T extends Record<string, unknown>>(value: T): Partial<T> =>
   Object.fromEntries(Object.entries(value).filter(([, item]) => item !== undefined)) as Partial<T>;
 
 export const resolveRuntimeConfig = (request: Request): RuntimeConfig => {
+  const authorizationHeader = request.header("authorization");
+  const apiKeyFromHeader = request.header("x-nuvio-api-key")
+    ?? (authorizationHeader?.toLowerCase().startsWith("bearer ")
+      ? authorizationHeader.slice("bearer ".length)
+      : undefined);
+
   const envConfig = {
     provider: process.env.NUVIO_PROVIDER,
     upstreamUrl: process.env.NUVIO_UPSTREAM_URL,
-    apiKey: process.env.NUVIO_API_KEY,
+    apiKey: apiKeyFromHeader ?? process.env.NUVIO_API_KEY,
     requestTimeoutMs: process.env.NUVIO_REQUEST_TIMEOUT_MS,
   };
 
@@ -28,7 +34,6 @@ export const resolveRuntimeConfig = (request: Request): RuntimeConfig => {
   const queryConfig = {
     provider: typeof request.query.provider === "string" ? request.query.provider : undefined,
     upstreamUrl: typeof request.query.upstreamUrl === "string" ? request.query.upstreamUrl : undefined,
-    apiKey: typeof request.query.apiKey === "string" ? request.query.apiKey : undefined,
     requestTimeoutMs:
       typeof request.query.requestTimeoutMs === "string" ? request.query.requestTimeoutMs : undefined,
   };
