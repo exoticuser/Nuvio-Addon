@@ -1,330 +1,79 @@
-[
-  {
-    "display_name": "VegaMovies",
-    "value": "vega",
-    "version": "2.8",
-    "icon": "",
-    "type": "global",
-    "disabled": false
+{
+  "id": "org.nuvio.streamio.addon",
+  "version": "1.0.0",
+  "name": "Nuvio Stream.io Bridge",
+  "description": "Configurable Nuvio addon with Stream.io-style catalog, metadata, and stream handlers.",
+  "logo": "https://raw.githubusercontent.com/stremio/stremio-art/main/logo.png",
+  "background": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=1600&q=80",
+  "types": ["movie", "series"],
+  "resources": [
+    {
+      "name": "catalog",
+      "types": ["movie", "series"],
+      "idPrefixes": ["tt", "tmdb"]
+    },
+    {
+      "name": "meta",
+      "types": ["movie", "series"],
+      "idPrefixes": ["tt", "tmdb"]
+    },
+    {
+      "name": "stream",
+      "types": ["movie", "series"],
+      "idPrefixes": ["tt", "tmdb"]
+    }
+  ],
+  "catalogs": [
+    {
+      "type": "movie",
+      "id": "bridge-movies",
+      "name": "Bridge Movies",
+      "extra": [
+        { "name": "search", "isRequired": false },
+        { "name": "genre", "isRequired": false },
+        { "name": "skip", "isRequired": false }
+      ]
+    },
+    {
+      "type": "series",
+      "id": "bridge-series",
+      "name": "Bridge Series",
+      "extra": [
+        { "name": "search", "isRequired": false },
+        { "name": "genre", "isRequired": false },
+        { "name": "skip", "isRequired": false }
+      ]
+    }
+  ],
+  "behaviorHints": {
+    "configurable": true,
+    "configurationRequired": false,
+    "adult": false
   },
-  {
-    "display_name": "MultiStream",
-    "value": "autoEmbed",
-    "version": "1.6",
-    "icon": "",
-    "type": "global",
-    "disabled": false
+  "nuvio": {
+    "providerId": "streamio-bridge",
+    "compatibility": "current"
   },
-  {
-    "display_name": "MoviesDrive",
-    "value": "drive",
-    "version": "2.1",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "MultiMovies",
-    "value": "multi",
-    "version": "1.3",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "4khdHub",
-    "value": "4khdhub",
-    "version": "2.2",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "Cinewood",
-    "value": "1cinevood",
-    "version": "1.4",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "World4uFree",
-    "value": "world4u",
-    "version": "1.4",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "KatMoviesHd",
-    "value": "katmovies",
-    "version": "1.6",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "MoviesMod",
-    "value": "mod",
-    "version": "1.3",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "UHDMovies",
-    "value": "uhd",
-    "version": "1.2",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "ProtonMovies",
-    "value": "protonMovies",
-    "version": "1.4",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "CinemaLuxe",
-    "value": "cinemaLuxe",
-    "version": "1.7",
-    "icon": "",
-    "type": "global",
-    "disabled": true
-  },
-  {
-    "display_name": "FilmyFly",
-    "value": "filmyfly",
-    "version": "1.4",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "MovieBox",
-    "value": "movieBox",
-    "version": "2.0",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "Movies4U",
-    "value": "movies4u",
-    "version": "1.5",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "KmMovies",
-    "value": "kmMovies",
-    "version": "1.3",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "Zeefliz",
-    "value": "zeefliz",
-    "version": "1.5",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "KatMovieFix",
-    "value": "katMovieFix",
-    "version": "1.6",
-    "icon": "",
-    "type": "global",
-    "disabled": true
-  },
-  {
-    "display_name": "Ringz",
-    "value": "ringz",
-    "version": "1.0",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "NetflixMirror",
-    "value": "netflixMirror",
-    "version": "1.7",
-    "icon": "",
-    "type": "global",
-    "disabled": true
-  },
-  {
-    "display_name": "PrimeMirror",
-    "value": "primeMirror",
-    "version": "1.6",
-    "icon": "",
-    "type": "global",
-    "disabled": true
-  },
-  {
-    "display_name": "HdHub4u",
-    "value": "hdhub4u",
-    "version": "2.0",
-    "icon": "",
-    "type": "global",
-    "disabled": false
-  },
-  {
-    "display_name": "Ogomovies",
-    "value": "ogomovies",
-    "version": "1.0",
-    "icon": "",
-    "type": "india",
-    "disabled": true
-  },
-  {
-    "display_name": "A.111477",
-    "value": "a111477",
-    "version": "1.2",
-    "icon": "",
-    "type": "english",
-    "disabled": true
-  },
-  {
-    "display_name": "VadaPav",
-    "value": "vadapav",
-    "version": "1.0",
-    "icon": "",
-    "type": "global",
-    "disabled": true
-  },
-  {
-    "display_name": "MoviesApi",
-    "value": "moviesApi",
-    "version": "1.0",
-    "icon": "",
-    "type": "english",
-    "disabled": true
-  },
-  {
-    "display_name": "MoviezWap",
-    "value": "moviezwap",
-    "version": "1.0",
-    "icon": "",
-    "type": "india",
-    "disabled": false
-  },
-  {
-    "display_name": "ShowBox",
-    "value": "showbox",
-    "version": "1.2",
-    "icon": "",
-    "type": "english",
-    "disabled": false
-  },
-  {
-    "display_name": "RidoMovies",
-    "value": "ridoMovies",
-    "version": "1.0",
-    "icon": "",
-    "type": "english",
-    "disabled": false
-  },
-  {
-    "display_name": "FlixHQ",
-    "value": "flixhq",
-    "version": "1.0",
-    "icon": "",
-    "type": "english",
-    "disabled": false
-  },
-  {
-    "display_name": "Primewire",
-    "value": "primewire",
-    "version": "1.0",
-    "icon": "",
-    "type": "english",
-    "disabled": false
-  },
-  {
-    "display_name": "HiAnime",
-    "value": "hiAnime",
-    "version": "1.1",
-    "icon": "",
-    "type": "english",
-    "disabled": true
-  },
-  {
-    "display_name": "Animetsu",
-    "value": "animetsu",
-    "version": "1.1",
-    "icon": "",
-    "type": "english",
-    "disabled": true
-  },
-  {
-    "display_name": "TokyoInsider",
-    "value": "tokyoInsider",
-    "version": "1.0",
-    "icon": "",
-    "type": "english",
-    "disabled": false
-  },
-  {
-    "display_name": "KissKh",
-    "value": "kissKh",
-    "version": "1.2",
-    "icon": "",
-    "type": "english",
-    "disabled": false
-  },
-  {
-    "display_name": "Dooflix",
-    "value": "dooflix",
-    "version": "1.4",
-    "icon": "",
-    "type": "india",
-    "disabled": true
-  },
-  {
-    "display_name": "RogMovies",
-    "value": "luxMovies",
-    "version": "2.4",
-    "icon": "",
-    "type": "india",
-    "disabled": false
-  },
-  {
-    "display_name": "TopMovies",
-    "value": "topmovies",
-    "version": "1.2",
-    "icon": "",
-    "type": "india",
-    "disabled": false
-  },
-  {
-    "display_name": "GuardaHD",
-    "value": "guardahd",
-    "version": "1.6",
-    "icon": "",
-    "type": "italy",
-    "disabled": false
-  },
-  {
-    "display_name": "SkyMovieHD",
-    "value": "skyMovieHD",
-    "version": "1.6",
-    "icon": "",
-    "type": "global",
-    "disabled": true
-  },
-  {
-    "display_name": "Joya9tv",
-    "value": "Joya9tv",
-    "version": "1.5",
-    "icon": "",
-    "type": "india",
-    "disabled": false
+  "configuration": {
+    "fields": [
+      {
+        "key": "upstreamUrl",
+        "label": "Upstream Stream.io Addon URL",
+        "type": "url",
+        "required": true
+      },
+      {
+        "key": "provider",
+        "label": "Provider",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "apiKey",
+        "label": "API Key",
+        "type": "password",
+        "required": false
+      }
+    ]
   }
-]
+}
