@@ -64,6 +64,6 @@ export interface StreamResponse {
 export interface RuntimeConfig {
   provider: string;
   upstreamUrl: string;
-  apiKey?: string;
+  apiKey: string | undefined;
   requestTimeoutMs: number;
 }

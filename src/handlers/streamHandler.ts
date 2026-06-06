@@ -11,13 +11,22 @@ const parseContentType = (value: string): ContentType => {
   throw new Error(`Unsupported content type '${value}'`);
 };
 
+const getRequiredParam = (request: Request, key: "type" | "id"): string => {
+  const value = request.params[key];
+  if (!value) {
+    throw new Error(`Missing '${key}' parameter`);
+  }
+
+  return value;
+};
+
 export const handleStream = async (request: Request): Promise<StreamResponse> => {
   const runtimeConfig = resolveRuntimeConfig(request);
   const provider = getProvider(runtimeConfig.provider);
 
   const payload: StreamRequest = {
-    type: parseContentType(request.params.type),
-    id: request.params.id,
+    type: parseContentType(getRequiredParam(request, "type")),
+    id: getRequiredParam(request, "id"),
   };
 
   return provider.getStreams(payload, runtimeConfig);

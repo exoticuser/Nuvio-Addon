@@ -4,14 +4,15 @@ import type { RuntimeConfig } from "../types.js";
 
 const decodeBase64UrlJson = (value: string): Record<string, unknown> | undefined => {
   try {
-    const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
-    const padded = normalized + "=".repeat((4 - (normalized.length % 4 || 4)) % 4);
-    const raw = Buffer.from(padded, "base64").toString("utf8");
+    const raw = Buffer.from(value, "base64url").toString("utf8");
     return JSON.parse(raw) as Record<string, unknown>;
   } catch {
     return undefined;
   }
 };
+
+const pickDefined = <T extends Record<string, unknown>>(value: T): Partial<T> =>
+  Object.fromEntries(Object.entries(value).filter(([, item]) => item !== undefined)) as Partial<T>;
 
 export const resolveRuntimeConfig = (request: Request): RuntimeConfig => {
   const envConfig = {
@@ -32,9 +33,16 @@ export const resolveRuntimeConfig = (request: Request): RuntimeConfig => {
       typeof request.query.requestTimeoutMs === "string" ? request.query.requestTimeoutMs : undefined,
   };
 
-  return runtimeConfigSchema.parse({
-    ...envConfig,
-    ...pathConfig,
-    ...queryConfig,
+  const parsed = runtimeConfigSchema.parse({
+    ...pickDefined(envConfig),
+    ...pickDefined(pathConfig ?? {}),
+    ...pickDefined(queryConfig),
   });
+
+  return {
+    provider: parsed.provider,
+    upstreamUrl: parsed.upstreamUrl,
+    apiKey: parsed.apiKey ?? undefined,
+    requestTimeoutMs: parsed.requestTimeoutMs,
+  };
 };

@@ -29,13 +29,22 @@ const parseExtra = (request: Request): CatalogExtra => {
   return extra;
 };
 
+const getRequiredParam = (request: Request, key: "type" | "id"): string => {
+  const value = request.params[key];
+  if (!value) {
+    throw new Error(`Missing '${key}' parameter`);
+  }
+
+  return value;
+};
+
 export const handleCatalog = async (request: Request): Promise<CatalogResponse> => {
   const runtimeConfig = resolveRuntimeConfig(request);
   const provider = getProvider(runtimeConfig.provider);
 
   const payload: CatalogRequest = {
-    type: parseContentType(request.params.type),
-    id: request.params.id,
+    type: parseContentType(getRequiredParam(request, "type")),
+    id: getRequiredParam(request, "id"),
     extra: parseExtra(request),
   };
 

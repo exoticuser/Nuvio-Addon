@@ -11,13 +11,22 @@ const parseContentType = (value: string): ContentType => {
   throw new Error(`Unsupported content type '${value}'`);
 };
 
+const getRequiredParam = (request: Request, key: "type" | "id"): string => {
+  const value = request.params[key];
+  if (!value) {
+    throw new Error(`Missing '${key}' parameter`);
+  }
+
+  return value;
+};
+
 export const handleMeta = async (request: Request): Promise<MetaResponse> => {
   const runtimeConfig = resolveRuntimeConfig(request);
   const provider = getProvider(runtimeConfig.provider);
 
   const payload: MetaRequest = {
-    type: parseContentType(request.params.type),
-    id: request.params.id,
+    type: parseContentType(getRequiredParam(request, "type")),
+    id: getRequiredParam(request, "id"),
   };
 
   return provider.getMeta(payload, runtimeConfig);
